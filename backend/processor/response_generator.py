@@ -1,11 +1,13 @@
 import json
 
+from constants import MODEL_NAME
 from processor.processor import Processor
 from utils.get_groq_responses import get_groq_response
 
 BASE_CONTEXT = """
 You are a language model that generates a response based on the input data.
-Your task is to construct a professional and empathetic response to user grievances in the selected language.
+Your task is to construct a professional and empathetic response to user grievances in the selected language on behalf of a the office assigned.
+If the grievance is not related to the assigned officer or department, the response should address the grievance in a non-official manner.
 The response must address the grievance and provide relevant details about the assigned officer or department.
 Output the result in JSON format.
 
@@ -34,7 +36,7 @@ class ResponseGenerator(Processor):
             {"role": "user", "content": context},
         ]
 
-        response_text = get_groq_response(messages, model="llama3-8b-8192")
+        response_text = get_groq_response(messages, MODEL_NAME)
         response_json = json.loads(response_text)
         print(f"Response generated: {response_json}")
         data["bot_response"] = response_json["response"]

@@ -1,8 +1,7 @@
+from constants import GROQ_API_KEY
 from groq import Groq
 
-client = Groq(
-    api_key="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"
-)
+client = Groq(api_key=f"{GROQ_API_KEY}")
 
 
 def get_groq_response(messages, model):

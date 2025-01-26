@@ -1,5 +1,6 @@
 import json
 
+from constants import MODEL_NAME
 from processor.processor import Processor
 from utils.get_groq_responses import get_groq_response
 
@@ -54,7 +55,7 @@ class ExtractGirevance(Processor):
             {"role": "user", "content": f"User message: {user_message}"},
         ]
 
-        response_text = get_groq_response(messages, "llama3-8b-8192")
+        response_text = get_groq_response(messages, MODEL_NAME)
         response_json = json.loads(response_text)
         print(f"Grievance extracted: {response_json}")
         data["extarcted_grievance"] = response_json

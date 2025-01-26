@@ -1,5 +1,6 @@
 import json
 
+from constants import MODEL_NAME
 from processor.processor import Processor
 from utils.get_groq_responses import get_groq_response
 
@@ -71,7 +72,7 @@ class Mapper(Processor):
             {"role": "user", "content": f"Grievance: {extracted_grievance}"},
         ]
 
-        response_text = get_groq_response(messages, model="llama3-8b-8192")
+        response_text = get_groq_response(messages, MODEL_NAME)
         response_json = json.loads(response_text)
         print(f"Officer mapping: {response_json}")
         data["officer_mapping"] = response_json
