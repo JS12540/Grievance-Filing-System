@@ -1,0 +1,6 @@
+groq==0.11.0
+gTTS==2.5.4
+python-dotenv==1.0.1
+streamlit==1.40.1
+streamlit-mic-recorder==0.0.8
+streamlit-TTS==0.0.7
