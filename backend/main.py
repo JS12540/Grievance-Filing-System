@@ -32,7 +32,6 @@ def text_to_speech_gtts(text, language="en"):
         # Create TTS object
         tts = gTTS(text=text, lang=language)
 
-        # Save to temporary file
         with tempfile.NamedTemporaryFile(delete=False, suffix=".mp3") as f:
             tts.save(f.name)
             audio_path = f.name
@@ -72,15 +71,17 @@ if recorded_text:
         """Run the pipeline asynchronously."""
         return await pipeline.run(data)
 
-    bot_response = asyncio.run(process_pipeline())
+    data = asyncio.run(process_pipeline())
 
-    if bot_response:
-        st.write("**Bot:**", bot_response)
+    if "bot_response" in data:
+        st.write("**Bot:**", data["bot_response"])
         st.session_state.chat_history.append(
-            {"role": "assistant", "content": bot_response}
+            {"role": "assistant", "content": data["bot_response"]}
         )
 
-        text_to_speech_gtts(bot_response, language=selected_language_code)
+        text_to_speech_gtts(
+            data["bot_response"], language=selected_language_code
+        )
 
 # Show Chat History Button
 if st.sidebar.button("Show Chat History"):

@@ -20,7 +20,7 @@ class ResponseGenerator(Processor):
     async def process(self, data):
         """Generates a response based on the input data."""
         selected_language = data.get("selected_language")
-        extracted_grievance = data.get("extracted_grievance")
+        extracted_grievance = data.get("extarcted_grievance")
         officer_mapping = data.get("officer_mapping")
 
         context = (

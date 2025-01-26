@@ -62,7 +62,7 @@ class Mapper(Processor):
     async def process(self, data):
         """Maps the grievance to the relevant government officer."""
         print("Request recieved to map the grievance")
-        extracted_grievance = data.get("extracted_grievance", "")
+        extracted_grievance = data.get("extarcted_grievance", "")
         if not extracted_grievance:
             raise ValueError("The extracted grievance is missing.")
 

@@ -47,15 +47,11 @@ class ExtractGirevance(Processor):
     async def process(self, data):
         """Process the text and extract the grievance details."""
         print("Request recieved to extract grievance")
-        chat_history = data["chat_history"]
+        user_message = data["text"]
 
-        # Prepare message history
-        messages = [CONTEXT] + [
-            {
-                "role": "user" if message["role"] == "user" else "assistant",
-                "content": message["content"],
-            }
-            for message in chat_history
+        messages = [
+            {"role": "system", "content": CONTEXT},
+            {"role": "user", "content": f"User message: {user_message}"},
         ]
 
         response_text = get_groq_response(messages, "llama3-8b-8192")
