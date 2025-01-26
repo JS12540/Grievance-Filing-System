@@ -54,3 +54,10 @@ just follow-logs bot
 ## Example Video
 
 [Watch the video](video.mp4)
+
+
+## Deployed Application
+
+You can access the live application by clicking on the link below:
+
+[Grievance Filing System](https://grievance-filing-system-qf453djhqosw45zmyzn7lr.streamlit.app/)
