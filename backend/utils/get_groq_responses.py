@@ -10,7 +10,7 @@ def get_groq_response(messages, model):
         response = client.chat.completions.create(
             messages=messages,
             model=model,
-            temperature=0.5,
+            temperature=0.3,
             max_tokens=1024,
             top_p=1,
             stop=None,

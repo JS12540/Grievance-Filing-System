@@ -25,6 +25,9 @@ selected_language_code = LANGUAGE_OPTIONS[selected_language]
 if "chat_history" not in st.session_state:
     st.session_state.chat_history = []
 
+if "last_data_object" not in st.session_state:
+    st.session_state.last_data_object = None
+
 
 def text_to_speech_gtts(text, language="en"):
     """Convert text to speech using gTTS."""
@@ -41,7 +44,7 @@ def text_to_speech_gtts(text, language="en"):
         st.error(f"Error with TTS: {e}")
 
 
-st.write("### Record and Transcribe Speech:")
+st.write("### Greviance Filing System:")
 recorded_text = speech_to_text(
     language=selected_language_code,
     start_prompt="Start recording",
@@ -72,6 +75,9 @@ if recorded_text:
         return await pipeline.run(data)
 
     data = asyncio.run(process_pipeline())
+    st.session_state.last_data_object = (
+        data  # Store the data object in session state
+    )
 
     if "bot_response" in data:
         st.write("**Bot:**", data["bot_response"])
@@ -82,6 +88,14 @@ if recorded_text:
         text_to_speech_gtts(
             data["bot_response"], language=selected_language_code
         )
+
+# Show Data Object Button
+if st.sidebar.button("Show Data Object"):
+    st.sidebar.write("### Data Object")
+    if st.session_state.last_data_object:
+        st.sidebar.json(st.session_state.last_data_object)
+    else:
+        st.sidebar.write("No data object available yet.")
 
 # Show Chat History Button
 if st.sidebar.button("Show Chat History"):
