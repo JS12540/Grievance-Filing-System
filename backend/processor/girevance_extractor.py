@@ -1,7 +1,7 @@
 import json
 
-from backend.processor.processor import Processor
-from backend.utils.get_groq_responses import get_groq_response
+from processor.processor import Processor
+from utils.get_groq_responses import get_groq_response
 
 CONTEXT = """
 You are an advanced AI language model tasked with extracting grievance details from the provided context for a government grievance system. Analyze the given text and extract the following information in JSON format:
@@ -46,7 +46,7 @@ class ExtractGirevance(Processor):
 
     async def process(self, data):
         """Process the text and extract the grievance details."""
-        text = data["text"]
+        print("Request recieved to extract grievance")
         chat_history = data["chat_history"]
 
         # Prepare message history
@@ -57,10 +57,10 @@ class ExtractGirevance(Processor):
             }
             for message in chat_history
         ]
-        messages.append({"role": "user", "content": text})
 
         response_text = get_groq_response(messages, "llama3-8b-8192")
         response_json = json.loads(response_text)
+        print(f"Grievance extracted: {response_json}")
         data["extarcted_grievance"] = response_json
 
         return data

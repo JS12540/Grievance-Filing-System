@@ -1,7 +1,7 @@
 import json
 
-from backend.processor.processor import Processor
-from backend.utils.get_groq_responses import get_groq_response
+from processor.processor import Processor
+from utils.get_groq_responses import get_groq_response
 
 CONTEXT = """
 You are part of a grievance mapping system. Your role is to map grievances to the most appropriate government officer based on their area of expertise and responsibilities. Each officer has specific roles and jurisdictions. Use the extracted grievance, context, and officer profiles provided below to make the best match. The output must be a JSON object.
@@ -61,6 +61,7 @@ class Mapper(Processor):
 
     async def process(self, data):
         """Maps the grievance to the relevant government officer."""
+        print("Request recieved to map the grievance")
         extracted_grievance = data.get("extracted_grievance", "")
         if not extracted_grievance:
             raise ValueError("The extracted grievance is missing.")
@@ -72,6 +73,7 @@ class Mapper(Processor):
 
         response_text = get_groq_response(messages, model="llama3-8b-8192")
         response_json = json.loads(response_text)
+        print(f"Officer mapping: {response_json}")
         data["officer_mapping"] = response_json
 
         return data

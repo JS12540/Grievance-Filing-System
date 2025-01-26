@@ -3,9 +3,8 @@ import tempfile
 
 import streamlit as st
 from gtts import gTTS
+from pipeline.pipeline import InferencePipeline
 from streamlit_mic_recorder import speech_to_text
-
-from backend.pipeline.pipeline import InferencePipeline
 
 # Language options
 LANGUAGE_OPTIONS = {

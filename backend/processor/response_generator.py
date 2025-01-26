@@ -1,7 +1,7 @@
 import json
 
-from backend.processor.processor import Processor
-from backend.utils.get_groq_responses import get_groq_response
+from processor.processor import Processor
+from utils.get_groq_responses import get_groq_response
 
 BASE_CONTEXT = """
 You are a language model that generates a response based on the input data.
@@ -36,6 +36,7 @@ class ResponseGenerator(Processor):
 
         response_text = get_groq_response(messages, model="llama3-8b-8192")
         response_json = json.loads(response_text)
+        print(f"Response generated: {response_json}")
         data["bot_response"] = response_json["response"]
 
         return data

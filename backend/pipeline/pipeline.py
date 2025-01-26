@@ -1,9 +1,9 @@
 from asyncio import iscoroutinefunction
 
-from backend.processor.girevance_extractor import ExtractGirevance
-from backend.processor.mapping import Mapper
-from backend.processor.processor import Processor
-from backend.processor.response_generator import ResponseGenerator
+from processor.girevance_extractor import ExtractGirevance
+from processor.mapping import Mapper
+from processor.processor import Processor
+from processor.response_generator import ResponseGenerator
 
 
 class Pipeline:
